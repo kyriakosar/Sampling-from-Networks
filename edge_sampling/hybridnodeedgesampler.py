@@ -2,7 +2,7 @@ import random
 import networkx as nx
 import networkit as nk
 from typing import Union, List
-from sampler import sampler
+from littleballoffur import Sampler
 
 
 

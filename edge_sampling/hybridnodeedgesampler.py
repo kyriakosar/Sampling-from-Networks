@@ -2,7 +2,8 @@ import random
 import networkx as nx
 import networkit as nk
 from typing import Union, List
-from littleballoffur.sampler import Sampler
+from sampler import sampler
+
 
 
 NKGraph = type(nk.graph.Graph())

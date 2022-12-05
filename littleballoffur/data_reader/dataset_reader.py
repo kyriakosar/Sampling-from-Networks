@@ -5,8 +5,8 @@ import pandas as pd
 import networkx as nx
 from six.moves import urllib
 
-
-class GraphReader(object):
+#'C:/Users/KYRIAKOS ARISTIDOU/Github Projects/final_snacs/littleballoffur/dataset/'
+class GraphReader1(object):
     r"""Class to read benchmark datasets for the sampling task.
 
     Args:
@@ -17,7 +17,7 @@ class GraphReader(object):
         self.dataset = dataset + "_edges.csv"
         self.base_url = (
             # "https://github.com/benedekrozemberczki/littleballoffur/raw/master/dataset/"
-            "https://github.com/kyriakosar/final_snacs/tree/main/datasets/"
+            "C:/Users/KYRIAKOS ARISTIDOU/Github Projects/final_snacs/littleballoffur/dataset/"
         )
 
     def _pandas_reader(self, bytes):
@@ -34,8 +34,8 @@ class GraphReader(object):
         Reading the dataset from the web.
         """
         path = os.path.join(self.base_url, self.dataset)
-        data = urllib.request.urlopen(path).read()
-        data = self._pandas_reader(data)
+        # data = urllib.request.urlopen(path).read()
+        data = self._pandas_reader(path)
         return data
 
     def get_graph(self) -> nx.classes.graph.Graph:

@@ -18,7 +18,7 @@ class GraphReader(object):
         self.base_url = (
             # "https://github.com/benedekrozemberczki/littleballoffur/raw/master/dataset/"
             # "https://github.com/kyriakosar/final_snacs/raw/main/datasets/"
-            "C:/Users/KYRIAKOS ARISTIDOU/Github Projects/final_snacs/littleballoffur/dataset/"
+            "https://github.com/kyriakosar/final_snacs/raw/main/datasets/"
         )
 
     def _pandas_reader(self, bytes):

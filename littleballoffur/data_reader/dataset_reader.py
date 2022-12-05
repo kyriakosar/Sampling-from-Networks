@@ -18,7 +18,7 @@ class GraphReader(object):
         self.base_url = (
             # "https://github.com/benedekrozemberczki/littleballoffur/raw/master/dataset/"
             # "https://github.com/kyriakosar/final_snacs/raw/main/datasets/"
-            "https://github.com/kyriakosar/final_snacs/raw/main/datasets/"
+            "C:/Users/KYRIAKOS ARISTIDOU/Github Projects/final_snacs/littleballoffur/dataset/"
         )
 
     def _pandas_reader(self, bytes):
@@ -35,8 +35,9 @@ class GraphReader(object):
         Reading the dataset from the web.
         """
         path = os.path.join(self.base_url, self.dataset)
-        data = urllib.request.urlopen(path).read()
-        data = self._pandas_reader(path)
+        # data = urllib.request.urlopen(path).read()
+        # data = self._pandas_reader(path)
+        data = pd.read_csv(path)
         return data
 
     def get_graph(self) -> nx.classes.graph.Graph:

@@ -20,7 +20,7 @@ class GraphReader(object):
             # "https://github.com/benedekrozemberczki/littleballoffur/raw/master/dataset/"
             # "https://github.com/kyriakosar/final_snacs/raw/main/datasets/"
             #"C:/Users/KYRIAKOS ARISTIDOU/Github Projects/final_snacs/littleballoffur/dataset/"
-            "/Users/achris/Documents/GitHub/final_snacs/littleballoffur/dataset/"
+            '/Users/achris/Documents/GitHub/final_snacs/littleballoffur/dataset/'
         )
 
     def _pandas_reader(self, bytes):
@@ -49,5 +49,8 @@ class GraphReader(object):
             * **graph** *(NetworkX graph)* - Graph of interest.
         """
         data = self._dataset_reader()
-        graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2")
+        if 'weights' in data:
+            graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2","weights")
+        else:
+            graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2")
         return graph

@@ -19,8 +19,8 @@ class GraphReader(object):
         self.base_url = (
             # "https://github.com/benedekrozemberczki/littleballoffur/raw/master/dataset/"
             # "https://github.com/kyriakosar/final_snacs/raw/main/datasets/"
-            #"C:/Users/KYRIAKOS ARISTIDOU/Github Projects/final_snacs/littleballoffur/dataset/"
-            '/Users/achris/Documents/GitHub/final_snacs/littleballoffur/dataset/'
+            "C:/Users/KYRIAKOS ARISTIDOU/Github Projects/final_snacs/littleballoffur/dataset/"
+            # '/Users/achris/Documents/GitHub/final_snacs/littleballoffur/dataset/'
         )
 
     def _pandas_reader(self, bytes):
@@ -50,7 +50,9 @@ class GraphReader(object):
         """
         data = self._dataset_reader()
         if 'weights' in data:
-            graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2","weights")
+            graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2")
+            edges_with_weights=[(a,b,data['weights']) for (a,b) in graph.edges()]
+            graph.add_weighted_edges_from(edges_with_weights)
         else:
             graph = nx.convert_matrix.from_pandas_edgelist(data, "id_1", "id_2")
         return graph

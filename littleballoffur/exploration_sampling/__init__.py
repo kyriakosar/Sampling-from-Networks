@@ -4,6 +4,7 @@ from .diffusionsampler import DiffusionSampler
 from .randomwalksampler import RandomWalkSampler
 from .forestfiresampler import ForestFireSampler
 from .spikyballsampler import SpikyBallSampler
+from .spikyballsampler_weighted import SpikyBallSamplerWeighted
 from .shortestpathsampler import ShortestPathSampler
 from .diffusiontreesampler import DiffusionTreeSampler
 from .breadthfirstsearchsampler import BreadthFirstSearchSampler

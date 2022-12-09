@@ -78,10 +78,15 @@ class SpikyBallSampler(Sampler):
         """
         self._sampled_nodes = set()
         num_nodes = self.backend.get_number_of_nodes(self._graph)
+        # print('Number of nodes:', num_nodes)
         self._set_of_nodes = set(range(num_nodes))
+        self.nodes_list = set(sorted([node for node in self._graph.nodes()]))
+        # print("set of nodes", self._set_of_nodes)
         num_initial_nodes = max(int(self.number_of_nodes * self.initial_nodes_ratio), 1)
+        # print('Set of nodes:',self._set_of_nodes)
+        # print('List of nodes:',self.nodes_list)
         self._seed_nodes = set(
-            np.random.choice(list(self.num_nodes), num_initial_nodes, replace=False)
+            np.random.choice(list(self.nodes_list), num_initial_nodes, replace=False)
         )
         self._visited_nodes = deque(maxlen=self.max_visited_nodes_backlog)
         self._sampled_nodes.update(self._seed_nodes)
@@ -164,11 +169,16 @@ class SpikyBallSampler(Sampler):
             and len(self._sampled_nodes) < self.number_of_nodes
         ):
             edges_data = self._get_new_edges(layer_nodes)
-            # print('edges_data',edges_data)
+            # print('edges_data',edges_data.values)
             p_norm = self._get_probability_density(edges_data, self.distrib_coeff)
             new_nodes = [edge.target for edge in edges_data["raw"]]
-            # print('New nodes',new_nodes)
+            # print('New nodes',len(new_nodes))
+            # print('P_ norm',p_norm[:,24185].shape)
+            p_norm = np.asarray(p_norm[:,24185]).astype('float64')
+            p_norm /= p_norm.sum()  # normalize
+
             if len(new_nodes) == 0:
+                
                 layer_nodes = [
                     self._visited_nodes.popleft()
                     for k in range(min(self.restart_hop_size, len(self._visited_nodes)))

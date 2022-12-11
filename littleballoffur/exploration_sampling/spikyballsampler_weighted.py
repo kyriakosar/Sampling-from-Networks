@@ -174,7 +174,7 @@ class SpikyBallSamplerWeighted(Sampler):
             new_nodes = [edge.target for edge in edges_data["raw"]]
             # print('New nodes',len(new_nodes))
             # print('P_ norm',p_norm[:,24185].shape)
-            p_norm = np.asarray(p_norm[:,24185]).astype('float64')
+            p_norm = np.asarray(p_norm[:,0]).astype('float64')
             p_norm /= p_norm.sum()  # normalize
 
             if len(new_nodes) == 0:

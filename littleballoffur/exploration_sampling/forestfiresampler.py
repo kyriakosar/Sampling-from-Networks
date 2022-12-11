@@ -45,12 +45,13 @@ class ForestFireSampler(Sampler):
         self._sampled_nodes = set()
         self._set_of_nodes = set(range(self.backend.get_number_of_nodes(graph)))
         self._visited_nodes = deque(maxlen=self.max_visited_nodes_backlog)
+        self.nodes_list = set(sorted([node for node in graph.nodes()]))
 
     def _start_a_fire(self, graph):
         """
         Starting a forest fire from a single node.
         """
-        remaining_nodes = list(self._set_of_nodes.difference(self._sampled_nodes))
+        remaining_nodes = list(self.nodes_list.difference(self._sampled_nodes))
         seed_node = random.choice(remaining_nodes)
         self._sampled_nodes.add(seed_node)
         node_queue = deque([seed_node])
